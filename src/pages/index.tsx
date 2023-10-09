@@ -66,11 +66,15 @@ export default function Home() {
       console.log('myArray:', myArray)
       console.log('myArray.length:', myArray.length)
 
-      const amount = ethers.parseEther('1')
+      const amountFormatted = Number(amount)
+      console.log('amount', amount)
+      console.log('amountFormatted', amountFormatted)
+      const total = amountFormatted * myArray.length
+      // const amount = ethers.parseEther('1')
 
-      // const approve = await token.approve(AIRDROP_MACHINE_ADDRESS, ethers.parseEther('10000'))
-      // const receipt = await approve.wait()
-      // console.log('approve tx:', receipt)
+      const approve = await token.approve(AIRDROP_MACHINE_ADDRESS, ethers.parseEther(String(total)))
+      const receipt = await approve.wait()
+      console.log('approve tx:', receipt)
 
       // https://explorer-test.arthera.net/tx/0xbf8d63de8e825e5edd8a28763544faf70393146ef17b1c0aab75948c9e1b08a7
       const airdropCall = await airdrop.distribute(from, myArray, amount, tokenAddress)
