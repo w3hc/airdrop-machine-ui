@@ -2,8 +2,8 @@ import { ThemingProps } from '@chakra-ui/react'
 import { Chain } from '@wagmi/core'
 
 export const SITE_NAME = 'Airdrop Machine'
-export const SITE_DESCRIPTION = 'I want to be with you when the night time comes'
-export const SITE_URL = 'tuesday-heartbreak.netlify.app'
+export const SITE_DESCRIPTION = 'Airdrop any token to your friends!'
+export const SITE_URL = 'airdrop-machine.netlify.app'
 
 export const THEME_INITIAL_COLOR = 'system'
 export const THEME_COLOR_SCHEME: ThemingProps['colorScheme'] = 'gray'
@@ -354,7 +354,7 @@ export const AIRDROP_ABI = [
 ]
 
 export const SOCIAL_TWITTER = 'W3HC'
-export const SOCIAL_GITHUB = 'w3hc/tuesday-heartbreak'
+export const SOCIAL_GITHUB = 'w3hc/airdrop-machine-ui'
 
 export const artheraTestnet: Chain = {
   id: 10243,

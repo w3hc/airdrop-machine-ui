@@ -11,7 +11,7 @@ export function Head(props: Props) {
   return (
     <NextHead>
       <title>{props.title ?? SITE_NAME} </title>
-      <meta property="og:url" content="https://tuesday-heartbreak.netlify.app/" />
+      <meta property="og:url" content="https://airdrop-machine.netlify.app/" />
       <meta property="og:type" content="website" />
       <meta property="og:title" content={props.title ?? SITE_NAME} />
       <meta name="twitter:card" content={SITE_DESCRIPTION} />
