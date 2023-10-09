@@ -1,11 +1,9 @@
 import { Text, Button, useToast, FormControl, FormLabel, Input, FormHelperText, Textarea } from '@chakra-ui/react'
 import { Head } from 'components/layout/Head'
-import { HeadingComponent } from 'components/layout/HeadingComponent'
 import { LinkComponent } from 'components/layout/LinkComponent'
 import { useState, useEffect } from 'react'
 import { useAccount, useNetwork, useSwitchNetwork } from 'wagmi'
 import { ethers } from 'ethers'
-import { NFT_CONTRACT_ADDRESS, NFT_CONTRACT_ABI } from '../utils/nft'
 import { useEthersSigner, useEthersProvider } from '../hooks/ethersAdapter'
 import { AIRDROP_MACHINE_ADDRESS, TOKEN_ADDRESS, TOKEN_ABI, AIRDROP_ABI } from '../utils/config'
 
@@ -22,7 +20,7 @@ export default function Home() {
   const [txHash, setTxHash] = useState<string>()
   const [amount, setAmount] = useState('1')
   const [tokenAddress, setTokenAddress] = useState(TOKEN_ADDRESS)
-  const [targets, setTargets] = useState<any>(['0xD8a394e7d7894bDF2C57139fF17e5CBAa29Dd977']) // const [tokenAddress, setTokenAddress] = useState('0xD8a394e7d7894bDF2C57139fF17e5CBAa29Dd977')
+  const [targets, setTargets] = useState<any>(['0xD8a394e7d7894bDF2C57139fF17e5CBAa29Dd977'])
 
   useEffect(() => {
     const init = async () => {
@@ -60,7 +58,21 @@ export default function Home() {
       const airdrop = new ethers.Contract(AIRDROP_MACHINE_ADDRESS, AIRDROP_ABI, signer)
 
       const from = address
-      console.log('targets:', targets)
+
+      console.log('targets.length:', targets.length)
+      if (targets.length < 85) {
+        toast({
+          title: 'Add another address',
+          description: 'You cannot send to only one address.',
+          status: 'error',
+          position: 'bottom',
+          variant: 'subtle',
+          duration: 20000,
+          isClosable: true,
+        })
+        setIsLoading(false)
+        return
+      }
       const myArray = targets.split(',')
       console.log('Array(targets):', Array(targets))
       console.log('myArray:', myArray)
@@ -70,7 +82,6 @@ export default function Home() {
       console.log('amount', amount)
       console.log('amountFormatted', amountFormatted)
       const total = amountFormatted * myArray.length
-      // const amount = ethers.parseEther('1')
 
       const approve = await token.approve(AIRDROP_MACHINE_ADDRESS, ethers.parseEther(String(total)))
       const receipt = await approve.wait()
@@ -125,7 +136,9 @@ export default function Home() {
           <br />
           <FormLabel>Target wallet addresses (1000 addresses max)</FormLabel>
           <Textarea value={targets} onChange={(e) => setTargets(e.target.value)} placeholder={targets} />
-          <FormHelperText>Who should be the recipients? These wallet address must be separated by a comma.</FormHelperText>
+          <FormHelperText>
+            Who should be the recipients? These wallet address must be separated by a comma, and there must be at least 2 addresses.
+          </FormHelperText>
         </FormControl>
         <Button
           mt={4}
