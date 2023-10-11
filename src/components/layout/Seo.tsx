@@ -9,17 +9,17 @@ export function Seo() {
     <DefaultSeo
       title={SITE_NAME}
       defaultTitle={SITE_NAME}
-      titleTemplate={`%s | ${SITE_NAME}`}
+      titleTemplate={`%s`}
       description={SITE_DESCRIPTION}
-      defaultOpenGraphImageWidth={762}
-      defaultOpenGraphImageHeight={708}
+      defaultOpenGraphImageWidth={572}
+      defaultOpenGraphImageHeight={716}
       openGraph={{
         type: 'website',
         siteName: SITE_NAME,
         url: origin,
         images: [
           {
-            url: `${origin}/parachute.jpg`,
+            url: `./public/parachute.jpg`,
             alt: `${SITE_NAME} Open Graph Image`,
           },
         ],
