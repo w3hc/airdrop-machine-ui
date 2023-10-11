@@ -54,7 +54,7 @@ export default function Home() {
       setTxHash('')
       setTxLink('')
 
-      const token = new ethers.Contract(TOKEN_ADDRESS, TOKEN_ABI, signer)
+      const token = new ethers.Contract(tokenAddress, TOKEN_ABI, signer)
       const airdrop = new ethers.Contract(AIRDROP_MACHINE_ADDRESS, AIRDROP_ABI, signer)
 
       const from = address
@@ -132,7 +132,7 @@ export default function Home() {
           <br />
           <FormLabel>Amount of tokens per wallet</FormLabel>
           <Input value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="1" />
-          <FormHelperText>How much Basic token you want to airdrop to each address?</FormHelperText>
+          <FormHelperText>How much do you want to airdrop to each address?</FormHelperText>
           <br />
           <FormLabel>Target wallet addresses (1000 addresses max)</FormLabel>
           <Textarea value={targets} onChange={(e) => setTargets(e.target.value)} placeholder={targets} />
