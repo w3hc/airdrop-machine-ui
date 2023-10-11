@@ -11,7 +11,7 @@ export const THEME_CONFIG = {
   initialColorMode: THEME_INITIAL_COLOR,
 }
 
-export const TOKEN_ADDRESS = '0x39ce7D3E8b1AC2a720b5cb3B240Fe1933cd36B5d' // Basic
+export const TOKEN_ADDRESS = '0x4c629dd85F4887bE21a3b78B4eE56ddd410D0Ffa' // Love
 export const AIRDROP_MACHINE_ADDRESS = '0x41cF4E5508662f55e7e5394bf43101B46a15e687' // Airdrop machine
 export const TOKEN_ABI = [
   {
