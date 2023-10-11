@@ -54,6 +54,7 @@ export default function Home() {
       setTxHash('')
       setTxLink('')
 
+      console.log('tokenAddress:', tokenAddress)
       const token = new ethers.Contract(tokenAddress, TOKEN_ABI, signer)
       const airdrop = new ethers.Contract(AIRDROP_MACHINE_ADDRESS, AIRDROP_ABI, signer)
 
@@ -79,6 +80,7 @@ export default function Home() {
       console.log('myArray.length:', myArray.length)
 
       const amountFormatted = Number(amount)
+      const goodAmount = ethers.parseEther(String(amountFormatted))
       console.log('amount', amount)
       console.log('amountFormatted', amountFormatted)
       const total = amountFormatted * myArray.length
@@ -88,7 +90,7 @@ export default function Home() {
       console.log('approve tx:', receipt)
 
       // https://explorer-test.arthera.net/tx/0xbf8d63de8e825e5edd8a28763544faf70393146ef17b1c0aab75948c9e1b08a7
-      const airdropCall = await airdrop.distribute(from, myArray, amount, tokenAddress)
+      const airdropCall = await airdrop.distribute(from, myArray, goodAmount, tokenAddress)
       const airdropCallReceipt = await airdropCall.wait(1)
       console.log('airdrop call tx:', airdropCallReceipt)
 
