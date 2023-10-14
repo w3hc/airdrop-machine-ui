@@ -1,4 +1,4 @@
-import { Text, Button, useToast, FormControl, FormLabel, Input, FormHelperText, Textarea } from '@chakra-ui/react'
+import { Text, Button, useToast, FormControl, FormLabel, Input, FormHelperText, Textarea, Box } from '@chakra-ui/react'
 import { Head } from 'components/layout/Head'
 import { LinkComponent } from 'components/layout/LinkComponent'
 import { useState, useEffect } from 'react'
@@ -16,6 +16,7 @@ export default function Home() {
   const toast = useToast()
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isLoading2, setIsLoading2] = useState<boolean>(false)
   const [txLink, setTxLink] = useState<string>()
   const [txHash, setTxHash] = useState<string>()
   const [amount, setAmount] = useState('1')
@@ -35,6 +36,54 @@ export default function Home() {
     console.log('signer:', signer)
     console.log('provider:', provider)
   }, [signer])
+
+  const mint = async () => {
+    try {
+      if (!signer) {
+        toast({
+          title: 'No wallet',
+          description: 'Please connect your wallet first.',
+          status: 'error',
+          position: 'bottom',
+          variant: 'subtle',
+          duration: 9000,
+          isClosable: true,
+        })
+        return
+      }
+      setIsLoading2(true)
+      setTxHash('')
+      setTxLink('')
+      const token = new ethers.Contract(tokenAddress, TOKEN_ABI, signer)
+      const call = await token.mint(await ethers.parseEther('8000000'))
+      const receipt = await call.wait()
+      console.log('tx:', receipt)
+      // setTxHash(receipt.hash)
+      // setTxLink('https://explorer-test.arthera.net/tx/' + receipt.hash)
+      setIsLoading2(false)
+      toast({
+        title: 'Successful mint',
+        description: 'Congrats, you now have 8,000,000 new LOVE in your wallet! 🎉',
+        status: 'success',
+        position: 'bottom',
+        variant: 'subtle',
+        duration: 20000,
+        isClosable: true,
+      })
+    } catch (e) {
+      setIsLoading2(false)
+      console.log('error:', e)
+      toast({
+        title: 'Woops',
+        description: 'Something went wrong during the minting process...',
+        status: 'error',
+        position: 'bottom',
+        variant: 'subtle',
+        duration: 9000,
+        isClosable: true,
+      })
+    }
+  }
 
   const airdrop = async () => {
     try {
@@ -99,7 +148,7 @@ export default function Home() {
       setIsLoading(false)
       toast({
         title: 'Aidrop successful',
-        description: 'You just airdropped your tokens! 🎉',
+        description: 'You just airdropped ' + amount + ' tokens per wallet! 🎉',
         status: 'success',
         position: 'bottom',
         variant: 'subtle',
@@ -132,6 +181,25 @@ export default function Home() {
           <Input value={tokenAddress} onChange={(e) => setTokenAddress(e.target.value)} placeholder="1" />
           <FormHelperText>What&apos;s the address of the token (ERC-20) you want to distribute?</FormHelperText>
           <br />
+          <Box>
+            <Button
+              mt={4}
+              size="xs"
+              colorScheme="blue"
+              variant="outline"
+              type="submit"
+              onClick={mint}
+              isLoading={isLoading2}
+              loadingText="Minting..."
+              spinnerPlacement="end">
+              Mint LOVE tokens
+            </Button>
+            <Text fontSize="sm">
+              You can airdrop any token, but the LOVE token is the default one. You can first mint LOVE tokens, then airdrop it to whoever you want.{' '}
+            </Text>
+          </Box>
+          <br />
+
           <FormLabel>Amount of tokens per wallet</FormLabel>
           <Input value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="1" />
           <FormHelperText>How much do you want to airdrop to each address?</FormHelperText>
