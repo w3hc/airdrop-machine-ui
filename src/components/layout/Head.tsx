@@ -16,7 +16,7 @@ export function Head(props: Props) {
       <meta property="og:title" content={props.title ?? SITE_NAME} />
       <meta name="twitter:card" content={SITE_DESCRIPTION} />
       <meta property="og:description" content={props.description ?? SITE_DESCRIPTION} />
-      <meta property="og:image" content={'./public/parachute.jpg'} />
+      <meta property="og:image" content={'https://bafybeiaanz35rifxfwu43cc3mdzbuevas3mflm77htcrmprwy3fdwhmgji.ipfs.w3s.link/parachute.jpg'} />
       <meta name="description" content={props.description ?? SITE_DESCRIPTION} />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
     </NextHead>

@@ -19,7 +19,7 @@ export function Seo() {
         url: origin,
         images: [
           {
-            url: `./public/parachute.jpg`,
+            url: `https://bafybeiaanz35rifxfwu43cc3mdzbuevas3mflm77htcrmprwy3fdwhmgji.ipfs.w3s.link/parachute.jpg`,
             alt: `${SITE_NAME} Open Graph Image`,
           },
         ],
