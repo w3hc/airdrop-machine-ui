@@ -176,7 +176,7 @@ export default function Home() {
 
       <main>
         {/* <HeadingComponent as="h2">Welcome! 👋</HeadingComponent> */}
-        {/* <FormControl>
+        <FormControl>
           <FormLabel>Token address</FormLabel>
           <Input value={tokenAddress} onChange={(e) => setTokenAddress(e.target.value)} placeholder="1" />
           <FormHelperText>What&apos;s the address of the token (ERC-20) you want to distribute?</FormHelperText>
@@ -225,7 +225,7 @@ export default function Home() {
           <Text py={4} fontSize="14px" color="#45a2f8">
             <LinkComponent href={txLink ? txLink : ''}>{txHash}</LinkComponent>
           </Text>
-        )} */}
+        )}
       </main>
     </>
   )

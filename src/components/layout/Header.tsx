@@ -23,10 +23,9 @@ export function Header(props: Props) {
       <Spacer />
 
       <Flex alignItems="center" gap={4}>
-        Due to a recent security alert, the usage of this app is paused until further notice. Thanks for your understanding.
-        {/* <PassportScore />
+        <PassportScore />
         <w3m-button />
-        <ThemeSwitcher /> */}
+        <ThemeSwitcher />
       </Flex>
     </Flex>
   )
